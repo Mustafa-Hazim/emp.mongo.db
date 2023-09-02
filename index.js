@@ -3,9 +3,15 @@ env.config()
 
 import express from 'express'
 const app = express()
-const uri = 'mongodb+srv://mustafa:'+process.env.DB_PASSWORD+'@mongo.ywgqlip.mongodb.net/employees?retryWrites=true&w=majority'
+
+import bodyParser from 'body-parser'
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}))
 
 import mongoose from 'mongoose'
+const uri = 'mongodb+srv://mustafa:'+process.env.DB_PASSWORD+'@mongo.ywgqlip.mongodb.net/employees?retryWrites=true&w=majority'
+
+import router from './routes/index.js'
 
 try {
     mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -13,6 +19,8 @@ try {
 } catch (error) {
     console.log(error);
 }
+
+app.use('/users', router)
 
 app.listen(4000, (err) => {
     if(err) console.log(err)

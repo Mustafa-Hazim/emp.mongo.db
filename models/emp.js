@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const mongooseTimeStamp = require('mongoose-timestamp');
+import mongoose from 'mongoose'
+import mongooseTimeStamp from 'mongoose-timestamp'
 
 
 const Schema = new mongoose.Schema({
@@ -9,7 +9,7 @@ const Schema = new mongoose.Schema({
     country: { type: String, required: true},
     jobTitle: { type: String, required: true},
     birthDay: { type: Date, required: true},
-    rigesterdSince: { type: Date, required: true},
+    registerdSince: { type: Date},
     avatar: {type: String},
     salary: {type: Number, required: true},
 });
