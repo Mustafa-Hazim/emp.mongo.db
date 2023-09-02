@@ -36,3 +36,35 @@ export const getEmpBySalary = async (req, res) => {
     // default behivor return missed more deatils:
     res.send('missed more data')
 }
+
+export const byName = async (req, res) => {
+    // extract the search keyword:
+    const firstName = req.query.firstName
+    const lastName = req.query.lastName
+    // check if there fist and last names
+    if (!firstName && !lastName) return res.status(400).send("missed the names")
+
+    let result;
+    // if the first and last name are availble
+    if (firstName && lastName) {
+        // using the regex /zero or more chars, value, zero or more chars/
+        result = await Employe.find({
+            fname: { $regex: `.*${firstName}.*`, $options: 'i' },
+            lname: { $regex: `.*${lastName}.*`, $options: 'i' }
+        })
+        // case the first name are only availble
+    } else if (firstName) {
+        // using the regex /zero or more chars, value, zero or more chars/
+        result = await Employe.find({
+            fname: { $regex: `.*${firstName}.*`, $options: 'i' },
+        })
+        // case the last name are only availble
+    } else if (lastName) {
+        result = await Employe.find({
+            // using the regex /zero or more chars, value, zero or more chars/
+            lname: { $regex: `.*${lastName}.*`, $options: 'i' }
+        })
+    }
+
+    res.json(result)
+}
