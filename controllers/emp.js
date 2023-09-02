@@ -66,5 +66,23 @@ export const byName = async (req, res) => {
         })
     }
 
-    res.json(result)
+    // send the resposne back
+    res.send(result)
+}
+
+export const byEmail = async (req, res) => {
+    // extract the search keyword:
+    const email = req.query.email
+    // check if there is email
+    if (!email) return res.status(400).send("missed the email")
+
+    let result;
+    
+    result = await Employe.find({
+        // using the regex /zero or more chars, value, zero or more chars/
+        email: { $regex: `.*${email}.*`, $options: 'i' }
+    })
+
+    // send the resposne back
+    res.send(result)
 }
