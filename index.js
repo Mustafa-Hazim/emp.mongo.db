@@ -20,6 +20,13 @@ try {
     console.log(error);
 }
 
+const arr = [1, 2, 3]
+const arr2 = [5,6,7]
+
+arr2.forEach(e => arr.push(e))
+
+console.log(arr)
+
 app.use('/users', router)
 
 app.listen(4000, (err) => {

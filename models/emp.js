@@ -8,7 +8,7 @@ const Schema = new mongoose.Schema({
     email: { type: String, required: true},
     country: { type: String, required: true},
     jobTitle: { type: String, required: true},
-    birthDay: { type: Date, required: true},
+    birthDay: { type: Number, required: true},
     registerdSince: { type: Date},
     avatar: {type: String},
     salary: {type: Number, required: true},
